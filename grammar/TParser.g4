@@ -10,14 +10,21 @@ expr: Id                            # idential
     | Int                           # value
     | Float                         # value 
     | func                          # function
-    | un_op expr                    # unary_operation
-    | expr bin_op expr              # binary_operation
     | OpenPar expr ClosePar         # brackets_operation
+    | Minus expr                    # unary_operation
+    | Plus expr                     # unary_operation
+    | expr Mul expr                 # binary_operation
+    | expr Div expr                 # binary_operation
+    | expr Plus expr                # binary_operation
+    | expr Minus expr               # binary_operation
+    | expr LEQ expr                 # binary_operation
+    | expr GEQ expr                 # binary_operation
+    | expr LT expr                  # binary_operation
+    | expr GT expr                  # binary_operation
+    | expr Equal expr               # binary_operation
+    | expr And expr                 # binary_operation
+    | expr Or expr                  # binary_operation
     | expr Qmark expr Colon expr    # ternary_operation
     ;
-
-un_op: op=Minus;
-bin_op: op=(Plus | Minus | Mul | Div | And 
-        | Or | LEQ | GEQ | LT | GT | Equal);
 
 func: Id OpenPar expr (Comma expr)* ClosePar;

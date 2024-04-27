@@ -36,9 +36,15 @@ antlr_target(SampleGrammarParser "grammar/TParser.g4" PARSER
 include_directories(${ANTLR_SampleGrammarLexer_OUTPUT_DIR})
 include_directories(${ANTLR_SampleGrammarParser_OUTPUT_DIR})
 include_directories(${ANTLR_SampleGrammarVisitor_OUTPUT_DIR})
+
+add_library(MathExpressionCalculator STATIC OBJECT 
+    MathExpressionCalculator.cpp
+    ${ANTLR_SampleGrammarLexer_CXX_OUTPUTS}
+    ${ANTLR_SampleGrammarParser_CXX_OUTPUTS}
+    ${ANTLR_SampleGrammarVisitor_CXX_OUTPUTS}
+)
+target_link_libraries(MathExpressionCalculator PUBLIC antlr4_static)
+
 # add generated grammar to demo binary target
-add_executable(main main.cpp
-               ${ANTLR_SampleGrammarLexer_CXX_OUTPUTS}
-               ${ANTLR_SampleGrammarParser_CXX_OUTPUTS}
-               ${ANTLR_SampleGrammarVisitor_CXX_OUTPUTS})
-target_link_libraries(main antlr4_static)
+add_executable(main main.cpp)
+target_link_libraries(main antlr4_static MathExpressionCalculator)
