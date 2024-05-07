@@ -43,6 +43,7 @@ add_library(MathExpressionCalculator STATIC OBJECT
     ${ANTLR_SampleGrammarParser_CXX_OUTPUTS}
     ${ANTLR_SampleGrammarVisitor_CXX_OUTPUTS}
 )
+message("${antlr4_static}")
 target_link_libraries(MathExpressionCalculator PUBLIC antlr4_static)
 
 # add generated grammar to demo binary target
